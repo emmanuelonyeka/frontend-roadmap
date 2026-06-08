@@ -1855,9 +1855,26 @@
   }
 
   function toggleCheck(el) {
-    el.classList.toggle('done');
-    updateProgress();
-  }
+  el.classList.toggle('done');
+  saveChecklist();
+  updateProgress();
+}
+
+ function saveChecklist() {
+  const items = document.querySelectorAll('.check-item');
+  const state = Array.from(items).map(item => item.classList.contains('done'));
+  localStorage.setItem('roadmap-checklist', JSON.stringify(state));
+}
+
+function loadChecklist() {
+  const saved = localStorage.getItem('roadmap-checklist');
+  if (!saved) return;
+  const state = JSON.parse(saved);
+  const items = document.querySelectorAll('.check-item');
+  items.forEach((item, i) => {
+    if (state[i]) item.classList.add('done');
+  });
+}
 
   function updateProgress() {
     const all = document.querySelectorAll('.check-item');
@@ -1885,7 +1902,9 @@
     observer.observe(bar);
   });
 
+  loadChecklist();
   updateProgress();
+
 </script>
 </body>
 </html>
