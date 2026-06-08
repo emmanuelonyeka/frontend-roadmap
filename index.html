@@ -1,1 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontend Developer Roadmap 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #17171f;
+    --border: #22222e;
+    --accent: #7c5cfc;
+    --accent2: #00d4aa;
+    --accent3: #ff6b35;
+    --accent4: #f0c040;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --phase1: #7c5cfc;
+    --phase2: #00d4aa;
+    --phase3: #ff6b35;
+    --phase4: #f0c040;
+    --phase5: #e0507a;
+    --phase6: #4fc3f7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 14px;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    padding: 80px 40px 60px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124,92,252,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0,212,170,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #a89bfc 40%, #00d4aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-item {
+    padding: 16px 20px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-item:hover { color: var(--text); }
+  .nav-item.p1 { border-color: transparent; } .nav-item.p1:hover { color: var(--phase1); border-color: var(--phase1); }
+  .nav-item.p2:hover { color: var(--phase2); border-color: var(--phase2); }
+  .nav-item.p3:hover { color: var(--phase3); border-color: var(--phase3); }
+  .nav-item.p4:hover { color: var(--phase4); border-color: var(--phase4); }
+  .nav-item.p5:hover { color: var(--phase5); border-color: var(--phase5); }
+  .nav-item.p6:hover { color: var(--phase6); border-color: var(--phase6); }
+
+  /* MAIN LAYOUT */
+  main { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* PHASE SECTION */
+  .phase {
+    margin: 60px 0;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .phase-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 6px;
+  }
+
+  .phase-title-block { flex: 1; }
+
+  .phase-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .phase-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    letter-spacing: 0.5px;
+  }
+
+  /* CARDS */
+  .cards { display: grid; gap: 16px; }
+
+  .cards-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .card:hover { transform: translateY(-2px); }
+
+  .card-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .card p, .card li { color: var(--muted); font-size: 13px; line-height: 1.8; }
+
+  .card ul { padding-left: 0; list-style: none; }
+
+  .card ul li::before { content: '→ '; color: var(--accent2); }
+
+  /* TOPIC ITEMS */
+  .topic-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+
+  .topic-item:hover { border-color: rgba(124,92,252,0.3); }
+
+  .topic-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .topic-desc { font-size: 12px; color: var(--muted); }
+
+  .topic-badges { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+
+  .badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .badge-must { background: rgba(255,107,53,0.15); color: #ff6b35; border: 1px solid rgba(255,107,53,0.3); }
+  .badge-core { background: rgba(124,92,252,0.15); color: #a89bfc; border: 1px solid rgba(124,92,252,0.3); }
+  .badge-nice { background: rgba(107,107,128,0.2); color: var(--muted); border: 1px solid var(--border); }
+  .badge-skip { background: rgba(240,192,64,0.1); color: #f0c040; border: 1px solid rgba(240,192,64,0.3); }
+
+  /* MASTERY BAR */
+  .mastery-bar {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  /* RESOURCES */
+  .resource-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .resource {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .resource:hover { border-color: rgba(124,92,252,0.4); }
+
+  .resource-type {
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .type-free { background: rgba(0,212,170,0.15); color: var(--accent2); }
+  .type-paid { background: rgba(124,92,252,0.15); color: var(--accent); }
+  .type-cert { background: rgba(240,192,64,0.15); color: var(--accent4); }
+
+  .resource-name { flex: 1; color: var(--text); }
+  .resource-note { color: var(--muted); font-size: 11px; }
+
+  /* PROJECT CARDS */
+  .project-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+  }
+
+  .project-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--border);
+    line-height: 1;
+  }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .project-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+
+  .project-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .skill-tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  /* INTERVIEW SECTION */
+  .interview-item {
+    padding: 10px 16px;
+    border-left: 2px solid var(--border);
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    transition: border-color 0.2s;
+  }
+
+  .interview-item:hover { border-color: var(--accent); color: var(--text); }
+
+  /* CHECKLIST */
+  .checklist-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 40px 0;
+  }
+
+  .checklist-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .checklist-group { margin-bottom: 24px; }
+
+  .checklist-group-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.15s;
+    padding-left: 4px;
+  }
+
+  .check-item:hover { background: var(--surface2); padding-left: 8px; }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .check-item.done .check-box {
+    background: var(--accent2);
+    border-color: var(--accent2);
+  }
+
+  .check-item.done .check-box::after {
+    content: '✓';
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .check-item.done .check-label {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+
+  .check-label { font-size: 13px; }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 20px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent3));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124,92,252,0.2);
+  }
+
+  .timeline-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .timeline-item p { font-size: 12px; color: var(--muted); }
+
+  /* SCHEDULE TABLE */
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 16px;
+  }
+
+  .schedule-table th {
+    text-align: left;
+    padding: 10px 16px;
+    background: var(--surface2);
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+  }
+
+  .schedule-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .schedule-table tr:nth-child(even) td { background: var(--surface2); }
+
+  /* QA SECTION */
+  .qa-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .qa-question {
+    padding: 18px 20px;
+    background: var(--surface2);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+  }
+
+  .qa-question:hover { background: var(--surface); }
+
+  .qa-toggle { color: var(--accent); font-size: 18px; flex-shrink: 0; transition: transform 0.3s; }
+
+  .qa-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .qa-item.open .qa-answer { max-height: 500px; padding: 16px 20px 20px; }
+  .qa-item.open .qa-toggle { transform: rotate(45deg); }
+
+  /* VERDICT BOXES */
+  .verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .verdict-yes { background: rgba(0,212,170,0.15); color: var(--accent2); border: 1px solid rgba(0,212,170,0.3); }
+  .verdict-no { background: rgba(255,107,53,0.15); color: #ff6b35; border: 1px solid rgba(255,107,53,0.3); }
+  .verdict-maybe { background: rgba(240,192,64,0.15); color: var(--accent4); border: 1px solid rgba(240,192,64,0.3); }
+
+  /* ACCELERATED PLANS */
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+
+  .plan-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .plan-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .plan-3mo::after { background: linear-gradient(90deg, var(--accent3), var(--accent4)); }
+  .plan-6mo::after { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  .plan-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .plan-subtitle { font-size: 11px; color: var(--muted); margin-bottom: 20px; letter-spacing: 1px; }
+
+  .plan-month {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .plan-month:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .plan-month-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .plan-month p { font-size: 12px; color: var(--muted); }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 60px 0 40px;
+  }
+
+  .section-divider h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: -0.3px;
+  }
+
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  /* PROGRESS TRACKER */
+  .progress-bar-outer {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+
+  .progress-label span:first-child {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  .progress-label span:last-child { color: var(--accent); }
+
+  .progress-track {
+    height: 6px;
+    background: var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .progress-stages {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 6px;
+  }
+
+  .progress-stage {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  footer strong { color: var(--text); }
+
+  /* UTILITY */
+  .text-phase1 { color: var(--phase1); }
+  .text-phase2 { color: var(--phase2); }
+  .text-phase3 { color: var(--phase3); }
+  .text-phase4 { color: var(--phase4); }
+  .text-phase5 { color: var(--phase5); }
+  .text-phase6 { color: var(--phase6); }
+
+  .bg-phase1 { background: rgba(124,92,252,0.1); color: var(--phase1); border: 1px solid rgba(124,92,252,0.3); }
+  .bg-phase2 { background: rgba(0,212,170,0.1); color: var(--phase2); border: 1px solid rgba(0,212,170,0.3); }
+  .bg-phase3 { background: rgba(255,107,53,0.1); color: var(--phase3); border: 1px solid rgba(255,107,53,0.3); }
+  .bg-phase4 { background: rgba(240,192,64,0.1); color: var(--phase4); border: 1px solid rgba(240,192,64,0.3); }
+  .bg-phase5 { background: rgba(224,80,122,0.1); color: var(--phase5); border: 1px solid rgba(224,80,122,0.3); }
+  .bg-phase6 { background: rgba(79,195,247,0.1); color: var(--phase6); border: 1px solid rgba(79,195,247,0.3); }
+
+  .accent-line1 { background: var(--phase1); }
+  .accent-line2 { background: var(--phase2); }
+  .accent-line3 { background: var(--phase3); }
+  .accent-line4 { background: var(--phase4); }
+  .accent-line5 { background: var(--phase5); }
+  .accent-line6 { background: var(--phase6); }
+
+  .fill-phase1 { background: linear-gradient(90deg, var(--phase1), #a89bfc); }
+  .fill-phase2 { background: linear-gradient(90deg, var(--phase2), #80ffdd); }
+  .fill-phase3 { background: linear-gradient(90deg, var(--phase3), #ffb347); }
+  .fill-phase4 { background: linear-gradient(90deg, var(--phase4), #ffdd80); }
+  .fill-phase5 { background: linear-gradient(90deg, var(--phase5), #ff8fab); }
+  .fill-phase6 { background: linear-gradient(90deg, var(--phase6), #b3e5fc); }
+
+  @media (max-width: 640px) {
+    header, nav, main, footer { padding-left: 20px; padding-right: 20px; }
+    .phase-header { flex-direction: column; gap: 12px; }
+    .cards-2 { grid-template-columns: 1fr; }
+    .plan-grid { grid-template-columns: 1fr; }
+    .topic-item { grid-template-columns: 1fr; }
+    .topic-badges { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">// frontend.roadmap — 2026 edition</div>
+  <h1>From Zero<br>to Hired</h1>
+  <p class="header-sub">A brutally practical roadmap to becoming a job-ready frontend developer in the shortest time possible.</p>
+  <div class="header-stats">
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Phases</span></div>
+    <div class="stat"><span class="stat-num">6mo</span><span class="stat-label">Full track</span></div>
+    <div class="stat"><span class="stat-num">3mo</span><span class="stat-label">Fast track</span></div>
+    <div class="stat"><span class="stat-num">10</span><span class="stat-label">Key answers</span></div>
+  </div>
+</header>
+
+<nav>
+  <a href="#phase1" class="nav-item p1">Phase 1 · JS Core</a>
+  <a href="#phase2" class="nav-item p2">Phase 2 · Adv JS + Git</a>
+  <a href="#phase3" class="nav-item p3">Phase 3 · React</a>
+  <a href="#phase4" class="nav-item p4">Phase 4 · TypeScript</a>
+  <a href="#phase5" class="nav-item p5">Phase 5 · Next.js</a>
+  <a href="#phase6" class="nav-item p6">Phase 6 · Job-Ready</a>
+  <a href="#qa" class="nav-item">10 Q&A</a>
+  <a href="#plans" class="nav-item">Plans</a>
+  <a href="#checklist" class="nav-item">Checklist</a>
+</nav>
+
+<main>
+
+  <!-- PROGRESS TRACKER -->
+  <div style="margin-top:40px;" class="progress-bar-outer">
+    <div class="progress-label">
+      <span>Your Career Progress</span>
+      <span id="progress-pct">0% complete</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="main-progress"></div></div>
+    <div class="progress-stages">
+      <span class="progress-stage">Start</span>
+      <span class="progress-stage">JS Solid</span>
+      <span class="progress-stage">React Ready</span>
+      <span class="progress-stage">TS + Next</span>
+      <span class="progress-stage">Hired</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 1
+  ══════════════════════════════════════════════ -->
+  <section class="phase" id="phase1">
+    <div class="phase-header">
+      <div class="phase-number bg-phase1">Phase 01</div>
+      <div class="phase-title-block">
+        <h2 class="phase-title text-phase1">JavaScript Foundations</h2>
+        <div class="phase-meta">
+          <span class="meta-tag">⏱ 4–6 weeks</span>
+          <span class="meta-tag">📅 4–6 hrs/day</span>
+          <span class="meta-tag">🔥 Non-negotiable</span>
+          <span class="meta-tag">🎯 Prerequisite for everything</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-accent accent-line1"></div>
+      <div class="card-label text-phase1">Why This Phase</div>
+      <p>You already know HTML and CSS reasonably well — that's your foundation. JavaScript is the actual programming language of the web and the gateway to everything else: React, TypeScript, Next.js. Without a solid JS base, you will hit a wall within weeks of starting any framework. Do not rush this phase. A shaky JS foundation will cost you 10x more time later.</p>
+    </div>
+
+    <div class="cards-2 cards" style="margin-bottom:24px;">
+      <div class="card">
+        <div class="card-accent accent-line1"></div>
+        <div class="card-label text-phase1">Non-Negotiable Topics</div>
+        <ul>
+          <li>Variables: let, const, var (scope differences)</li>
+          <li>Data types: string, number, boolean, null, undefined</li>
+          <li>Functions: declaration, expression, arrow functions</li>
+          <li>Arrays & array methods (map, filter, reduce, forEach)</li>
+          <li>Objects: creation, access, destructuring</li>
+          <li>Control flow: if/else, switch, loops</li>
+          <li>DOM manipulation (querySelector, events, innerHTML)</li>
+          <li>Event listeners and event delegation</li>
+          <li>Template literals, spread/rest operators</li>
+          <li>Modules: import/export (ES6 modules)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-accent accent-line1"></div>
+        <div class="card-label text-phase1">Can Skip / Learn Later</div>
+        <ul>
+          <li>Generators and iterators (skip for now)</li>
+          <li>WeakMap / WeakSet (very advanced, skip)</li>
+          <li>Bitwise operators (skip entirely)</li>
+          <li>Regex (just learn the basics, not deeply)</li>
+          <li>var (learn it exists, never use it)</li>
+          <li>Legacy browser quirks (irrelevant in 2026)</li>
+        </ul>
+        <div style="margin-top:12px; padding:10px; background:rgba(240,192,64,0.05); border:1px solid rgba(240,192,64,0.2); border-radius:6px; font-size:12px; color:var(--accent4);">
+          ⚡ Rule: If a topic doesn't come up in the first 6 months of a junior dev job, skip it for now.
+        </div>
+      </div>
+    </div>
+
+    <!-- Topics with mastery -->
+    <h3 style="font-family:'Syne',sans-serif; font-size:15px; margin-bottom:12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase; font-size:11px;">Topics + Required Mastery Level</h3>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Variables, Types, Operators</div>
+        <div class="topic-desc">let/const, primitive types, comparison operators, truthiness/falsy values</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase1" style="width:90%"></div></div><span>90%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Functions & Scope</div>
+        <div class="topic-desc">Arrow functions, closures, hoisting, lexical scope — deeply understood</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase1" style="width:95%"></div></div><span>95%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Arrays & Objects</div>
+        <div class="topic-desc">Destructuring, spread, rest, all major array methods. Use them daily.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase1" style="width:95%"></div></div><span>95%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">DOM Manipulation</div>
+        <div class="topic-desc">querySelector, createElement, addEventListener, classList — you'll do this without React occasionally</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase1" style="width:80%"></div></div><span>80%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">ES6+ Syntax</div>
+        <div class="topic-desc">Template literals, optional chaining, nullish coalescing, shorthand properties</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase1" style="width:90%"></div></div><span>90%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Error Handling</div>
+        <div class="topic-desc">try/catch/finally, throwing errors, error types</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase1" style="width:75%"></div></div><span>75%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-core">CORE</span></div>
+    </div>
+
+    <!-- Phase 1 Projects -->
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Portfolio Projects</h3>
+    <div class="cards-2 cards" style="margin-bottom:24px;">
+      <div class="project-card" data-num="01">
+        <div class="project-title">To-Do List App</div>
+        <div class="project-desc">CRUD operations, localStorage, dynamic DOM updates. Simple but proves you can program.</div>
+        <div class="project-skills">
+          <span class="skill-tag">Arrays</span><span class="skill-tag">DOM</span><span class="skill-tag">Events</span><span class="skill-tag">localStorage</span>
+        </div>
+      </div>
+      <div class="project-card" data-num="02">
+        <div class="project-title">Weather App (API)</div>
+        <div class="project-desc">Fetch data from OpenWeather API, display results. Proves you can consume REST APIs without a framework.</div>
+        <div class="project-skills">
+          <span class="skill-tag">fetch()</span><span class="skill-tag">Promises</span><span class="skill-tag">DOM</span><span class="skill-tag">API keys</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 1 Interview -->
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:0 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Common Interview Questions at This Stage</h3>
+    <div class="interview-item">What's the difference between == and ===?</div>
+    <div class="interview-item">Explain closures with a real-world example.</div>
+    <div class="interview-item">What's the difference between let, const, and var?</div>
+    <div class="interview-item">How does event delegation work?</div>
+    <div class="interview-item">What does Array.map() return vs forEach()?</div>
+    <div class="interview-item">What is the DOM and how do you interact with it?</div>
+
+    <!-- Phase 1 Resources -->
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Resources</h3>
+    <div class="resource-list">
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">The Odin Project — Foundations + JavaScript</span><span class="resource-note">Best free JS curriculum. Do this.</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">javascript.info</span><span class="resource-note">The definitive JS reference guide</span></div>
+      <div class="resource"><span class="resource-type type-paid">PAID</span><span class="resource-name">Jonas Schmedtmann — "The Complete JavaScript Course" (Udemy)</span><span class="resource-note">~$15 on sale. Best structured video course.</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">freeCodeCamp — JavaScript Algorithms & Data Structures</span><span class="resource-note">Earns a certificate. Good for practice.</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 2
+  ══════════════════════════════════════════════ -->
+  <section class="phase" id="phase2">
+    <div class="phase-header">
+      <div class="phase-number bg-phase2">Phase 02</div>
+      <div class="phase-title-block">
+        <h2 class="phase-title text-phase2">Advanced JavaScript + Git</h2>
+        <div class="phase-meta">
+          <span class="meta-tag">⏱ 3–4 weeks</span>
+          <span class="meta-tag">📅 4–6 hrs/day</span>
+          <span class="meta-tag">🔥 Non-negotiable</span>
+          <span class="meta-tag">🎯 Gateway to React</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-accent accent-line2"></div>
+      <div class="card-label text-phase2">Why This Phase</div>
+      <p>This phase covers the JavaScript features that React is built on. If you don't understand Promises, async/await, and array methods fluently — React will feel like magic (the bad kind). Git is non-negotiable: every single professional job requires it from day one. You cannot get hired without it.</p>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Asynchronous JavaScript</div>
+        <div class="topic-desc">Promises, async/await, .then()/.catch(), Promise.all(). React apps are 80% async.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase2" style="width:95%"></div></div><span>95%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Fetch API & REST APIs</div>
+        <div class="topic-desc">GET, POST, PUT, DELETE. Reading JSON. Handling errors. Used in every real project.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase2" style="width:90%"></div></div><span>90%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Git + GitHub</div>
+        <div class="topic-desc">init, add, commit, push, pull, branch, merge, PR workflow. Employers check your GitHub profile.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase2" style="width:85%"></div></div><span>85%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Prototypes & Classes (ES6)</div>
+        <div class="topic-desc">class syntax, inheritance, 'this' keyword. Needed to understand React class components (legacy) and general OOP discussions in interviews.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase2" style="width:70%"></div></div><span>70%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-core">CORE</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Local Storage / Session Storage</div>
+        <div class="topic-desc">Persisting data in the browser. Used constantly in real projects.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase2" style="width:80%"></div></div><span>80%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-core">CORE</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Modules (import/export)</div>
+        <div class="topic-desc">Named exports, default exports, re-exporting. React uses this constantly.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase2" style="width:95%"></div></div><span>95%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Portfolio Projects</h3>
+    <div class="cards-2 cards" style="margin-bottom:24px;">
+      <div class="project-card" data-num="03">
+        <div class="project-title">GitHub Profile Finder</div>
+        <div class="project-desc">Use the GitHub public API to search users, show repos, stats. Demonstrates async JS + API consumption + error handling.</div>
+        <div class="project-skills"><span class="skill-tag">async/await</span><span class="skill-tag">fetch</span><span class="skill-tag">Error handling</span></div>
+      </div>
+      <div class="project-card" data-num="04">
+        <div class="project-title">Movie Search App</div>
+        <div class="project-desc">Use OMDB or TMDB API. Search, display, save favourites to localStorage. Great portfolio piece.</div>
+        <div class="project-skills"><span class="skill-tag">Promises</span><span class="skill-tag">localStorage</span><span class="skill-tag">DOM</span></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:0 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Interview Questions</h3>
+    <div class="interview-item">What's the difference between a Promise and async/await?</div>
+    <div class="interview-item">What does Promise.all() do? When would you use it?</div>
+    <div class="interview-item">Explain the event loop in JavaScript.</div>
+    <div class="interview-item">What is a Git merge vs a rebase?</div>
+    <div class="interview-item">What happens when you call an async function without await?</div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Resources</h3>
+    <div class="resource-list">
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">javascript.info — Promises & Async</span><span class="resource-note">Chapters 11–12 specifically</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">Pro Git Book (git-scm.com/book)</span><span class="resource-note">The official free Git book. Read chapters 1–3.</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">GitHub Skills (skills.github.com)</span><span class="resource-note">Interactive GitHub courses, free</span></div>
+      <div class="resource"><span class="resource-type type-paid">PAID</span><span class="resource-name">Jonas Schmedtmann — JS Course (continued)</span><span class="resource-note">The same course covers async deeply</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 3
+  ══════════════════════════════════════════════ -->
+  <section class="phase" id="phase3">
+    <div class="phase-header">
+      <div class="phase-number bg-phase3">Phase 03</div>
+      <div class="phase-title-block">
+        <h2 class="phase-title text-phase3">React + Tailwind CSS</h2>
+        <div class="phase-meta">
+          <span class="meta-tag">⏱ 6–8 weeks</span>
+          <span class="meta-tag">📅 4–6 hrs/day</span>
+          <span class="meta-tag">🔥 The most hired skill in 2026</span>
+          <span class="meta-tag">💼 Apply for jobs after this</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-accent accent-line3"></div>
+      <div class="card-label text-phase3">Why This Phase</div>
+      <p>React is the dominant UI library in the job market — over 60% of frontend job postings in 2026 require it. Combined with Tailwind CSS (which is now the industry-standard CSS approach for React projects), this phase is where you become genuinely hireable. After Phase 3 you can apply for junior roles, freelance, and internships.</p>
+    </div>
+
+    <div class="cards-2 cards" style="margin-bottom:20px;">
+      <div class="card">
+        <div class="card-accent accent-line3"></div>
+        <div class="card-label text-phase3">React — Must Learn</div>
+        <ul>
+          <li>JSX syntax and how it compiles</li>
+          <li>Functional components (not class components)</li>
+          <li>Props — passing data down</li>
+          <li>useState — local component state</li>
+          <li>useEffect — side effects, lifecycle</li>
+          <li>useContext — shared state without prop drilling</li>
+          <li>useRef — referencing DOM elements</li>
+          <li>useMemo / useCallback — performance basics</li>
+          <li>Lists and keys</li>
+          <li>Conditional rendering</li>
+          <li>Forms and controlled components</li>
+          <li>Component composition patterns</li>
+          <li>React Router v6 — client-side routing</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-accent accent-line3"></div>
+        <div class="card-label text-phase3">Tailwind CSS — Must Learn</div>
+        <ul>
+          <li>Utility-first philosophy</li>
+          <li>Responsive design (sm:, md:, lg:)</li>
+          <li>Flexbox & Grid utilities</li>
+          <li>Typography & spacing utilities</li>
+          <li>Colors, borders, shadows</li>
+          <li>Hover/focus states</li>
+          <li>Dark mode (dark: prefix)</li>
+          <li>Component extraction with @apply (sparingly)</li>
+          <li>Tailwind config customization</li>
+          <li>shadcn/ui (component library built on Tailwind)</li>
+        </ul>
+        <div style="margin-top:12px; padding:10px; background:rgba(255,107,53,0.05); border:1px solid rgba(255,107,53,0.2); border-radius:6px; font-size:12px; color:#ff8c6b;">
+          ⚡ Tailwind is now the most demanded CSS approach. Skip Styled Components & Bootstrap entirely.
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">useState + useEffect</div>
+        <div class="topic-desc">The two most used hooks. Must be second nature. Every React app uses them.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase3" style="width:100%"></div></div><span>100%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">React Router v6</div>
+        <div class="topic-desc">useNavigate, useParams, Route, Outlet, nested routing. All SPAs need routing.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase3" style="width:85%"></div></div><span>85%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Data Fetching in React</div>
+        <div class="topic-desc">useEffect + fetch(), loading/error states, then TanStack Query (React Query) for caching. This is how every React app fetches data.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase3" style="width:90%"></div></div><span>90%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Redux / Zustand</div>
+        <div class="topic-desc">Redux is declining. Learn Zustand (100 lines of API) for global state. Skip Redux Toolkit unless a job specifically requires it.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase3" style="width:60%"></div></div><span>60%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-nice">NICE</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">shadcn/ui</div>
+        <div class="topic-desc">The dominant React component library in 2026. Built on Tailwind + Radix UI. Learn to use and customize it.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase3" style="width:75%"></div></div><span>75%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-core">CORE</span></div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Portfolio Projects</h3>
+    <div class="cards-2 cards" style="margin-bottom:24px;">
+      <div class="project-card" data-num="05">
+        <div class="project-title">Full-Stack-Like React Dashboard</div>
+        <div class="project-desc">A multi-page app with authentication (mock), data tables, charts, CRUD. Uses React Router, TanStack Query, Tailwind, shadcn/ui. This is a hiring-level project.</div>
+        <div class="project-skills"><span class="skill-tag">React</span><span class="skill-tag">Tailwind</span><span class="skill-tag">shadcn/ui</span><span class="skill-tag">React Router</span><span class="skill-tag">TanStack Query</span></div>
+      </div>
+      <div class="project-card" data-num="06">
+        <div class="project-title">E-Commerce Product Page</div>
+        <div class="project-desc">Product listing, cart, filters, responsive design. Real-world UI patterns. Looks great in a portfolio.</div>
+        <div class="project-skills"><span class="skill-tag">React</span><span class="skill-tag">useState</span><span class="skill-tag">Zustand</span><span class="skill-tag">Tailwind</span></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:0 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Interview Questions</h3>
+    <div class="interview-item">What's the difference between state and props?</div>
+    <div class="interview-item">When does useEffect run? What's the dependency array?</div>
+    <div class="interview-item">What is prop drilling and how do you solve it?</div>
+    <div class="interview-item">Explain the React re-rendering cycle.</div>
+    <div class="interview-item">Why do we need keys in lists?</div>
+    <div class="interview-item">What's the difference between controlled and uncontrolled components?</div>
+    <div class="interview-item">When would you use useMemo?</div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Resources</h3>
+    <div class="resource-list">
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">React Official Docs (react.dev)</span><span class="resource-note">Completely rewritten in 2023. Start here.</span></div>
+      <div class="resource"><span class="resource-type type-paid">PAID</span><span class="resource-name">Jonas Schmedtmann — "The Ultimate React Course" (Udemy)</span><span class="resource-note">Best React video course available. ~$15.</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">Tailwind CSS Docs (tailwindcss.com)</span><span class="resource-note">Official docs are excellent. Read the full intro.</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">shadcn/ui (ui.shadcn.com)</span><span class="resource-note">Official docs + component examples</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">TanStack Query Docs</span><span class="resource-note">tanstack.com/query — the data fetching standard</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 4
+  ══════════════════════════════════════════════ -->
+  <section class="phase" id="phase4">
+    <div class="phase-header">
+      <div class="phase-number bg-phase4">Phase 04</div>
+      <div class="phase-title-block">
+        <h2 class="phase-title text-phase4">TypeScript</h2>
+        <div class="phase-meta">
+          <span class="meta-tag">⏱ 3–4 weeks</span>
+          <span class="meta-tag">📅 4–6 hrs/day</span>
+          <span class="meta-tag">🔥 Now industry-standard</span>
+          <span class="meta-tag">📈 Required in 70%+ of jobs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-accent accent-line4"></div>
+      <div class="card-label text-phase4">Why After React, Not Before</div>
+      <p>Learn TypeScript AFTER you're comfortable with React — not before. Reason: TypeScript adds type-level complexity on top of JavaScript. If you're still learning JavaScript fundamentals and React simultaneously, adding TypeScript will overwhelm you and slow you down. However, once you're comfortable with React, TypeScript will feel natural and you'll learn it in 3–4 weeks instead of 8+. In 2026, TypeScript is required in the majority of professional React codebases.</p>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Basic Types</div>
+        <div class="topic-desc">string, number, boolean, array, tuple, enum, any, unknown, never, void</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase4" style="width:95%"></div></div><span>95%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Interfaces & Type Aliases</div>
+        <div class="topic-desc">Defining shapes for objects, components props, API responses. Used constantly in React with TypeScript.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase4" style="width:95%"></div></div><span>95%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Generics</div>
+        <div class="topic-desc">The hardest concept in TypeScript. You'll encounter these in libraries. Must understand basic generics.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase4" style="width:70%"></div></div><span>70%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-core">CORE</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">TypeScript in React</div>
+        <div class="topic-desc">Typing component props, hooks (useState&lt;T&gt;), events (React.ChangeEvent), refs, children</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase4" style="width:90%"></div></div><span>90%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Advanced Types</div>
+        <div class="topic-desc">Union, intersection, mapped types, conditional types, utility types (Partial, Pick, Omit, Record)</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase4" style="width:65%"></div></div><span>65%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-nice">NICE</span></div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Portfolio Projects</h3>
+    <div class="project-card" data-num="07" style="margin-bottom:20px;">
+      <div class="project-title">Rebuild a Previous Project in TypeScript</div>
+      <div class="project-desc">Take your best React project and convert it to TypeScript. Type all props, state, API responses. Shows practical TS ability — more impressive to employers than a new toy project.</div>
+      <div class="project-skills"><span class="skill-tag">TypeScript</span><span class="skill-tag">React</span><span class="skill-tag">Interfaces</span><span class="skill-tag">Generics</span></div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:0 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Interview Questions</h3>
+    <div class="interview-item">What's the difference between interface and type?</div>
+    <div class="interview-item">What is 'any' and why should you avoid it?</div>
+    <div class="interview-item">Explain generics with an example.</div>
+    <div class="interview-item">How do you type React event handlers?</div>
+    <div class="interview-item">What are utility types? Give 3 examples.</div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Resources</h3>
+    <div class="resource-list">
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">TypeScript Official Docs Handbook (typescriptlang.org)</span><span class="resource-note">Read the handbook cover to cover</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">Total TypeScript (free tier) — Matt Pocock</span><span class="resource-note">Best TS learning resource in 2026</span></div>
+      <div class="resource"><span class="resource-type type-paid">PAID</span><span class="resource-name">Total TypeScript Pro (totaltypescript.com)</span><span class="resource-note">Worth it for serious TS mastery</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">React TypeScript Cheatsheet (react-typescript-cheatsheet.netlify.app)</span><span class="resource-note">Bookmark this immediately</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 5
+  ══════════════════════════════════════════════ -->
+  <section class="phase" id="phase5">
+    <div class="phase-header">
+      <div class="phase-number bg-phase5">Phase 05</div>
+      <div class="phase-title-block">
+        <h2 class="phase-title text-phase5">Next.js + Performance</h2>
+        <div class="phase-meta">
+          <span class="meta-tag">⏱ 4–5 weeks</span>
+          <span class="meta-tag">📅 4–6 hrs/day</span>
+          <span class="meta-tag">🔥 Rapidly becoming a standard</span>
+          <span class="meta-tag">💼 Mid-level territory</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-accent accent-line5"></div>
+      <div class="card-label text-phase5">Why Next.js</div>
+      <p>Next.js is the production-grade React framework used at scale. In 2026 it's required in a significant share of startup and enterprise roles. It adds: server-side rendering (SSR), static site generation (SSG), file-system routing, image optimization, and API routes. Importantly: if you're already solid with React and TypeScript, Next.js takes 3–4 weeks to get productive — not months.</p>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">App Router (Next.js 14+)</div>
+        <div class="topic-desc">The new file-system routing with layouts, pages, loading.tsx, error.tsx. This is the current standard — not Pages Router.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase5" style="width:85%"></div></div><span>85%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Server Components vs Client Components</div>
+        <div class="topic-desc">The most important mental model in Next.js. When to use 'use client'. Data fetching in server components.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase5" style="width:90%"></div></div><span>90%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">SSR / SSG / ISR</div>
+        <div class="topic-desc">Server-Side Rendering, Static Generation, Incremental Static Regeneration. Understand when and why to use each.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase5" style="width:80%"></div></div><span>80%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Web Performance Basics</div>
+        <div class="topic-desc">Core Web Vitals (LCP, FID, CLS), lazy loading, code splitting, image optimization. Employers ask about this.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase5" style="width:75%"></div></div><span>75%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-core">CORE</span></div>
+    </div>
+
+    <div class="topic-item">
+      <div>
+        <div class="topic-name">Deployment (Vercel)</div>
+        <div class="topic-desc">Deploy your Next.js apps to Vercel in minutes. Every portfolio project should be live on a URL.</div>
+        <div class="mastery-bar"><span>Mastery needed:</span><div class="bar-track"><div class="bar-fill fill-phase5" style="width:85%"></div></div><span>85%</span></div>
+      </div>
+      <div class="topic-badges"><span class="badge badge-must">MUST</span></div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Portfolio Projects</h3>
+    <div class="cards-2 cards" style="margin-bottom:24px;">
+      <div class="project-card" data-num="08">
+        <div class="project-title">Blog / Content Site with CMS</div>
+        <div class="project-desc">Next.js + MDX or Contentful/Sanity. SSG for posts, ISR for updates. Demonstrates SSG + deployment + real-world architecture.</div>
+        <div class="project-skills"><span class="skill-tag">Next.js</span><span class="skill-tag">SSG</span><span class="skill-tag">MDX</span><span class="skill-tag">Vercel</span></div>
+      </div>
+      <div class="project-card" data-num="09">
+        <div class="project-title">SaaS Landing Page + Dashboard</div>
+        <div class="project-desc">A complete product site with marketing pages (SSG) and a protected dashboard (SSR). Auth with NextAuth or Clerk. Your showstopper portfolio piece.</div>
+        <div class="project-skills"><span class="skill-tag">Next.js</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Auth</span><span class="skill-tag">SSR</span><span class="skill-tag">Tailwind</span></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:0 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Interview Questions</h3>
+    <div class="interview-item">What's the difference between SSR and SSG in Next.js?</div>
+    <div class="interview-item">When should a component be a Server Component vs Client Component?</div>
+    <div class="interview-item">What are Core Web Vitals and why do they matter?</div>
+    <div class="interview-item">How does Next.js handle code splitting automatically?</div>
+    <div class="interview-item">What is ISR and when would you use it?</div>
+
+    <h3 style="font-family:'Syne',sans-serif; font-size:11px; margin:24px 0 12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">Resources</h3>
+    <div class="resource-list">
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">Next.js Official Docs (nextjs.org/docs)</span><span class="resource-note">The App Router tutorial is excellent</span></div>
+      <div class="resource"><span class="resource-type type-paid">PAID</span><span class="resource-name">ByteGrad — "Professional React & Next.js" (Udemy)</span><span class="resource-note">Modern, App Router focused course</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">web.dev/learn — Performance</span><span class="resource-note">Google's free performance course</span></div>
+      <div class="resource"><span class="resource-type type-free">FREE</span><span class="resource-name">Vercel YouTube Channel</span><span class="resource-note">Official videos on Next.js features</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 6
+  ══════════════════════════════════════════════ -->
+  <section class="phase" id="phase6">
+    <div class="phase-header">
+      <div class="phase-number bg-phase6">Phase 06</div>
+      <div class="phase-title-block">
+        <h2 class="phase-title text-phase6">Job-Ready: Portfolio + Soft Skills + Certifications</h2>
+        <div class="phase-meta">
+          <span class="meta-tag">⏱ 2–3 weeks</span>
+          <span class="meta-tag">📅 Ongoing</span>
+          <span class="meta-tag">🚀 Apply aggressively</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-2 cards" style="margin-bottom:24px;">
+      <div class="card">
+        <div class="card-accent accent-line6"></div>
+        <div class="card-label text-phase6">Portfolio Must-Haves</div>
+        <ul>
+          <li>3–5 projects (not 10 mediocre ones)</li>
+          <li>Every project live on Vercel/Netlify</li>
+          <li>Every project has a GitHub repo with a README</li>
+          <li>One project should be a real-world clone (Airbnb, Notion-style, etc.)</li>
+          <li>One project should use an external API with real data</li>
+          <li>Responsive on mobile — non-negotiable</li>
+          <li>Personal portfolio site with your own domain</li>
+          <li>LinkedIn profile with project screenshots</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-accent accent-line6"></div>
+        <div class="card-label text-phase6">Certifications That Matter</div>
+        <ul>
+          <li><strong style="color:var(--accent4)">freeCodeCamp Responsive Web Design</strong> — Recognized, free</li>
+          <li><strong style="color:var(--accent4)">freeCodeCamp JavaScript Algorithms</strong> — Recognized, free</li>
+          <li><strong style="color:var(--accent4)">Meta Front-End Developer (Coursera)</strong> — $50/mo, well-regarded</li>
+          <li><strong style="color:var(--accent4)">Google UX Design (Coursera)</strong> — Adds design literacy, useful</li>
+          <li><strong style="color:var(--accent4)">AWS Cloud Practitioner</strong> — Good if targeting product companies</li>
+        </ul>
+        <div style="margin-top:12px; padding:10px; background:rgba(79,195,247,0.05); border:1px solid rgba(79,195,247,0.2); border-radius:6px; font-size:12px; color:var(--phase6);">
+          ⚡ Your GitHub portfolio matters more than any certificate. Build in public.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-accent accent-line6"></div>
+      <div class="card-label text-phase6">Where to Apply</div>
+      <p style="margin-bottom:12px;">For Nigeria-based / remote work, focus on: <strong style="color:var(--text)">Upwork</strong> (start with small projects, build reviews), <strong style="color:var(--text)">Toptal</strong> (tough screening, high pay), <strong style="color:var(--text)">Turing</strong> (remote US companies), <strong style="color:var(--text)">Remote.co</strong>, <strong style="color:var(--text)">We Work Remotely</strong>, <strong style="color:var(--text)">LinkedIn</strong> (set to Open to Work, remote). Locally: reach out directly to Lagos startups, fintech companies (Paystack, Flutterwave ecosystem), and agencies.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       Q&A
+  ══════════════════════════════════════════════ -->
+  <div class="section-divider" id="qa"><h2>10 Critical Questions Answered</h2></div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>1. Should I learn TypeScript before or after React?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-no">AFTER React</div>
+      <p>Learn TypeScript AFTER you're comfortable with React — not before. React is already a paradigm shift for someone coming from vanilla JS. TypeScript on top of that is a second paradigm shift. If you try to learn both simultaneously, you'll spend more time debugging type errors than understanding React concepts. Once you're fluent with React (components, hooks, routing, data fetching), TypeScript takes only 3–4 weeks to get productive. The one exception: if a job you really want explicitly requires TypeScript on day one, then skim TypeScript basics first and learn it deeply while doing React.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>2. Is Redux still worth learning in 2026?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-no">Skip it — mostly</div>
+      <p>Redux has been in steady decline since 2022. The React ecosystem has moved toward: (1) <strong style="color:var(--text)">useContext + useReducer</strong> for simple global state, (2) <strong style="color:var(--text)">Zustand</strong> for medium complexity (tiny API, no boilerplate), and (3) <strong style="color:var(--text)">TanStack Query / React Query</strong> for server state. Redux is still present in large legacy codebases, so it's worth knowing it exists and being able to read Redux code. But building new things in Redux in 2026 is working against the ecosystem. Learn Zustand instead — you can learn the full API in an afternoon.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>3. Should I learn Next.js?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-yes">Yes — after React</div>
+      <p>Absolutely yes — but only after you're comfortable with React. Next.js is the production framework that sits on top of React. It handles routing, SSR, SSG, image optimization, and deployment in a way that pure React cannot. In 2026, the majority of professional React projects are Next.js projects. It's required for many mid-level roles and strongly preferred for junior roles at product companies. It's not optional anymore — it's the natural next step after React mastery.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>4. Which CSS approach is most demanded today?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-yes">Tailwind CSS — clearly dominant</div>
+      <p>The 2026 landscape is clear: <strong style="color:var(--text)">Tailwind CSS</strong> is the dominant approach for React projects. Job postings mentioning CSS methodology request Tailwind far more than any alternative. CSS Modules are still used (and you should know them — they're just scoped CSS files), but Tailwind is what teams reach for. Styled Components and Emotion (CSS-in-JS) are declining — they add runtime overhead and teams have largely moved away. Bootstrap is legacy territory. The practical recommendation: <strong style="color:var(--text)">Master Tailwind. Know CSS Modules. Skip Styled Components and Bootstrap entirely.</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>5. What frontend certifications actually matter?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-maybe">Few — but some help</div>
+      <p>Most frontend certifications are resume padding. The ones that carry genuine weight: <strong style="color:var(--text)">1. freeCodeCamp (JavaScript & Web Design certs)</strong> — widely recognized, free, proves you did structured work. <strong style="color:var(--text)">2. Meta Front-End Developer (Coursera)</strong> — employer-recognized, structured curriculum, worth the cost. <strong style="color:var(--text)">3. Google UX Design (Coursera)</strong> — adds design credibility. What matters far more than any certification: a strong GitHub with real projects, a live portfolio with 3–5 polished projects, and your ability to pass a technical interview. Certifications open doors; your code keeps you in the room.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>6. At what point can I realistically start applying for jobs?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-yes">After Phase 3 (React + Tailwind)</div>
+      <p>After completing Phase 3 — solid JavaScript, React, Tailwind, and 2–3 portfolio projects — you are hireable as a junior frontend developer. That's approximately Month 3–4 of consistent 4–6 hour daily study. At this point: start applying to junior roles and internships. Don't wait until you finish the entire roadmap — Phase 4 and 5 (TypeScript and Next.js) can be learned on the job. In fact, many companies will help you learn TypeScript once you're hired. The caveat: your portfolio projects must be live, well-documented, and genuinely impressive — not tutorial clones.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>7. At what point can I start freelancing?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-yes">After Phase 3 — potentially sooner</div>
+      <p>Freelancing has a lower bar than employment in some ways: clients care about results, not your resume. If you have strong HTML/CSS skills and can build a decent responsive website — you can start pitching local businesses right now with static sites. By Phase 3 (React + Tailwind), you can charge for full web apps. Based on your existing work (Lumière restaurant template, real estate templates), you already have portfolio pieces that could land restaurant, hospitality, or real estate clients. Start outreach immediately while you study — land the project, then build it as you learn. That's how most freelancers actually start.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>8. What frontend skills are most requested by companies right now?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-yes">In order of demand</div>
+      <p>In order of job posting frequency in 2026: <strong style="color:var(--text)">1. React</strong> (dominant). <strong style="color:var(--text)">2. TypeScript</strong> (now standard, not optional). <strong style="color:var(--text)">3. Next.js</strong> (rapidly becoming required). <strong style="color:var(--text)">4. Tailwind CSS</strong> (the CSS standard). <strong style="color:var(--text)">5. Git + GitHub</strong> (table stakes). <strong style="color:var(--text)">6. REST APIs / async JS</strong> (everywhere). <strong style="color:var(--text)">7. Testing basics</strong> (Vitest, React Testing Library). <strong style="color:var(--text)">8. Web accessibility</strong> (WCAG compliance, increasingly required). <strong style="color:var(--text)">9. Performance optimization</strong> (Core Web Vitals). <strong style="color:var(--text)">10. CI/CD basics</strong> (GitHub Actions).</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>9. What frontend skills are becoming less valuable?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-no">Avoid these time sinks</div>
+      <p><strong style="color:var(--text)">jQuery</strong> — still in legacy codebases, but never for new work. <strong style="color:var(--text)">Redux</strong> — declining, replaced by Zustand + TanStack Query. <strong style="color:var(--text)">Styled Components / Emotion</strong> — fading fast. <strong style="color:var(--text)">Bootstrap / Foundation</strong> — legacy UI frameworks. <strong style="color:var(--text)">Angular</strong> — not declining but a smaller, more enterprise-specific market. <strong style="color:var(--text)">Vue.js</strong> — great framework, but the React job market is 3–4x larger. <strong style="color:var(--text)">Class components in React</strong> — only needed to maintain legacy code. <strong style="color:var(--text)">Grunt/Gulp</strong> — replaced by Vite and native tooling. Don't spend time on any of these in 2026.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-question" onclick="toggleQA(this)">
+      <span>10. If you had only 6 months, what exact path would you follow?</span>
+      <span class="qa-toggle">+</span>
+    </div>
+    <div class="qa-answer">
+      <div class="verdict verdict-yes">The optimal 6-month path</div>
+      <p><strong style="color:var(--text)">Month 1:</strong> Intermediate + Advanced JavaScript. javascript.info + Jonas Schmedtmann's JS course. Build the To-Do and Weather App. <strong style="color:var(--text)">Month 2:</strong> Async JS, Git/GitHub, first real API project. Build the GitHub Profile Finder. Start your GitHub profile — commit code daily. <strong style="color:var(--text)">Month 3:</strong> React core — all main hooks, routing, data fetching. Build the dashboard project. Start applying for junior roles and internships. Start Upwork profile. <strong style="color:var(--text)">Month 4:</strong> React continued + Tailwind CSS + shadcn/ui. Build the e-commerce project. Apply aggressively. <strong style="color:var(--text)">Month 5:</strong> TypeScript — typed React from scratch. Rebuild a project in TypeScript. <strong style="color:var(--text)">Month 6:</strong> Next.js + Deployment. Build the SaaS project. Polish portfolio, apply everywhere, do mock interviews.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       3-MONTH & 6-MONTH PLANS
+  ══════════════════════════════════════════════ -->
+  <div class="section-divider" id="plans"><h2>Accelerated Roadmaps</h2></div>
+
+  <div class="plan-grid">
+    <div class="plan-card plan-3mo">
+      <div class="plan-title">3-Month Fast Track</div>
+      <div class="plan-subtitle">// SURVIVAL MODE — 4–6 hrs/day, no days off</div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--accent3)">Month 1 — JavaScript</div>
+        <p>Weeks 1–2: Core JS (variables, functions, arrays, DOM). Weeks 3–4: Async JS, Promises, APIs, Git basics. Project: Weather App + GitHub Finder.</p>
+      </div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--accent4)">Month 2 — React + Tailwind</div>
+        <p>Weeks 5–6: React fundamentals (hooks, props, routing). Weeks 7–8: TanStack Query, forms, Tailwind, shadcn/ui. Project: Dashboard App.</p>
+      </div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--accent2)">Month 3 — Polish + Apply</div>
+        <p>Weeks 9–10: TypeScript basics in React. Weeks 11–12: Portfolio refinement, mock interviews, job applications. Project: E-Commerce App + Portfolio site live.</p>
+      </div>
+      <div style="padding:12px; background:rgba(255,107,53,0.08); border:1px solid rgba(255,107,53,0.2); border-radius:6px; margin-top:12px; font-size:12px; color:#ff6b35;">
+        ⚡ At month 3: You can apply for junior jobs and freelance. Next.js comes later.
+      </div>
+    </div>
+
+    <div class="plan-card plan-6mo">
+      <div class="plan-title">6-Month Job-Ready</div>
+      <div class="plan-subtitle">// COMPLETE TRACK — Thorough, confident, competitive</div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--phase1)">Month 1 — JS Foundations</div>
+        <p>All of Phase 1. Core JS + DOM. 2 projects.</p>
+      </div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--phase2)">Month 2 — Advanced JS + Git</div>
+        <p>All of Phase 2. Async, APIs, Git workflow. 2 projects.</p>
+      </div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--phase3)">Month 3–4 — React + Tailwind</div>
+        <p>All of Phase 3. React hooks, routing, data fetching, Tailwind, shadcn. 2 projects. Start applying mid-Month 4.</p>
+      </div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--phase4)">Month 5 — TypeScript</div>
+        <p>All of Phase 4. Typed React from scratch. Rebuild a project in TS.</p>
+      </div>
+      <div class="plan-month">
+        <div class="plan-month-label" style="color:var(--phase5)">Month 6 — Next.js + Launch</div>
+        <p>All of Phase 5. SSR/SSG, Vercel deployment. SaaS project. Portfolio live. Apply everywhere.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAILY SCHEDULE -->
+  <div class="section-divider" style="margin-top:50px;"><h2>Daily Study Schedule (4–6 hrs/day)</h2></div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-accent" style="background:linear-gradient(to bottom, var(--accent), var(--accent2))"></div>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Time Block</th>
+          <th>Activity</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Block 1 (Morning)</td>
+          <td>Review yesterday's code + fix any bugs you left</td>
+          <td>30 min</td>
+        </tr>
+        <tr>
+          <td>Block 2 (Morning)</td>
+          <td>New concept study (video course or docs)</td>
+          <td>90 min</td>
+        </tr>
+        <tr>
+          <td>Break</td>
+          <td>Walk, rest, no screens</td>
+          <td>30 min</td>
+        </tr>
+        <tr>
+          <td>Block 3 (Afternoon)</td>
+          <td>Hands-on coding — implement what you just learned</td>
+          <td>90 min</td>
+        </tr>
+        <tr>
+          <td>Block 4 (Afternoon)</td>
+          <td>Work on portfolio project</td>
+          <td>60 min</td>
+        </tr>
+        <tr>
+          <td>Break</td>
+          <td>Rest</td>
+          <td>30 min</td>
+        </tr>
+        <tr>
+          <td>Block 5 (Evening)</td>
+          <td>Problem-solving / CodeWars or review tough concept</td>
+          <td>30–60 min</td>
+        </tr>
+        <tr>
+          <td>Block 6 (Evening)</td>
+          <td>Git commit, write a note on what you learned, plan tomorrow</td>
+          <td>15 min</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px; font-size:12px; color:var(--muted);">
+      ⚡ <strong style="color:var(--text)">Non-negotiable rule:</strong> Commit to GitHub every single day — even if it's one line. Build your streak. Employers look at contribution graphs.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CHECKLIST
+  ══════════════════════════════════════════════ -->
+  <div class="section-divider" id="checklist"><h2>Master Checklist</h2></div>
+
+  <div class="checklist-section">
+    <div class="checklist-title">
+      <span>✅</span>
+      <span>Complete Skill Tracker</span>
+      <span style="font-family:'DM Mono'; font-size:13px; font-weight:400; color:var(--accent); margin-left:auto;" id="check-count">0 / 0 complete</span>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title" style="color:var(--phase1)">▸ Phase 1 — JavaScript Foundations</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Variables: let, const — scope and difference</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Data types: string, number, boolean, null, undefined</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Arrow functions and function declarations</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Closures — understand and explain them</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Array methods: map, filter, reduce, forEach, find</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Object destructuring and spread/rest operators</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">DOM: querySelector, createElement, addEventListener</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Event delegation</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Template literals, optional chaining, nullish coalescing</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">ES6 modules: import / export</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">try/catch error handling</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: To-Do App (live on GitHub Pages)</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: Weather App using fetch + public API</span></div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title" style="color:var(--phase2)">▸ Phase 2 — Advanced JS + Git</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Promises: .then(), .catch(), .finally()</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">async / await — fluent usage</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Promise.all() and Promise.race()</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Fetch API — GET and POST requests</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Git: init, add, commit, push, pull</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Git: branches, merge, pull requests</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">GitHub profile — professional and active</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">localStorage: read, write, delete</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">ES6 Classes — basic class syntax and inheritance</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: GitHub Profile Finder</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: Movie Search App with localStorage favourites</span></div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title" style="color:var(--phase3)">▸ Phase 3 — React + Tailwind CSS</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">JSX syntax — how it works and compiles</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Functional components and props</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">useState — local state management</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">useEffect — side effects and lifecycle</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">useContext — global state without Redux</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">useRef, useMemo, useCallback</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Custom hooks — build at least 2 yourself</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">React Router v6 — all core concepts</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Forms and controlled inputs</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Lists and keys — no key warning errors</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">TanStack Query — useQuery and useMutation</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Tailwind CSS — responsive utilities fluent</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">shadcn/ui — install and customize components</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Zustand — basic global state store</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: React Dashboard (multi-page, live URL)</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: E-Commerce Product Page</span></div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title" style="color:var(--phase4)">▸ Phase 4 — TypeScript</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Basic types — string, number, boolean, array, tuple</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Interfaces and Type Aliases — when to use each</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Union and intersection types</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Generics — basic usage and reading library generics</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Utility types: Partial, Pick, Omit, Record, Required</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Typing React props and component return types</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Typing useState, useRef, event handlers</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Type-safe API response handling</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: React project rebuilt in TypeScript</span></div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title" style="color:var(--phase5)">▸ Phase 5 — Next.js</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">App Router: pages, layouts, loading, error</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Server Components vs Client Components</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">SSR — server-side rendering a page</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">SSG — static site generation</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">ISR — incremental static regeneration</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Dynamic routes and route parameters</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">next/image — optimized images</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Core Web Vitals — understand LCP, FID/INP, CLS</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Deploy app to Vercel — live URL</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: Blog with SSG (live on Vercel)</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">PROJECT: SaaS Landing + Dashboard (your hero project)</span></div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title" style="color:var(--phase6)">▸ Phase 6 — Job-Ready</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Portfolio site live with custom domain</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">All projects on GitHub with READMEs</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">LinkedIn profile optimized + Open To Work</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Upwork profile created with portfolio work</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">freeCodeCamp — JS Algorithms certificate earned</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">5+ mock interviews completed</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">20+ job applications sent</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">First freelance client or internship secured 🎉</span></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>Frontend Developer Roadmap 2026</strong> — Built for Emmanuel.</p>
+  <p style="margin-top:8px;">Every expert was once a beginner who refused to give up. Commit the code. Ship the projects. Get hired.</p>
+</footer>
+
+<script>
+  function toggleQA(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.check-item');
+    const done = document.querySelectorAll('.check-item.done');
+    const pct = Math.round((done.length / all.length) * 100);
+    document.getElementById('check-count').textContent = `${done.length} / ${all.length} complete`;
+    document.getElementById('progress-pct').textContent = `${pct}% complete`;
+    document.getElementById('main-progress').style.width = pct + '%';
+  }
+
+  // Animate bars on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.width || e.target.style.width;
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.bar-fill').forEach(bar => {
+    const w = bar.style.width;
+    bar.style.width = '0%';
+    bar.dataset.width = w;
+    setTimeout(() => { bar.style.width = w; }, 300);
+    observer.observe(bar);
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>
